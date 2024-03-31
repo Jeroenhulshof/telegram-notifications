@@ -1,24 +1,23 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"log"
 )
 
 type TelegramBot struct {
 	Token string
 }
 
-func getToken() string {
-	token := flag.String("token", "value", "Fetching token")
-
-	flag.Parse()
-
-	return *token
-}
-
 func (bot TelegramBot) getMe() (string, error) {
 	apiEndpoint := fmt.Sprintf("https://api.telegram.org/bot%s/getMe", bot.Token)
 
 	return newGetRequest(apiEndpoint)
+}
+
+func (bot TelegramBot) sendMessage(chatId string, message string) {
+	log.Print(bot.Token)
+	apiEndpoint := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage", bot.Token)
+
+	newPostRequest(apiEndpoint, chatId, message)
 }
