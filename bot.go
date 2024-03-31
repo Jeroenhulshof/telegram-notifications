@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"strings"
 )
@@ -19,7 +18,6 @@ func (bot TelegramBot) getMe() (string, error) {
 }
 
 func (bot TelegramBot) sendMessage(chatId string, message string) {
-	log.Print(bot.Token)
 	apiEndpoint := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage", bot.Token)
 
 	payload := strings.NewReader(fmt.Sprintf(`{"chat_id":"%s", "text":"%s", "parse_mode":"Markdown", "disable_web_page_preview":false, "disable_notification":false, "reply_to_message_id":null}`, chatId, message))
